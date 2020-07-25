@@ -2,9 +2,21 @@ from flask import Flask, jsonify, request
 import keras
 import cv2
 import numpy as np
+from sklearn.preprocessing import LabelEncoder
+import os
+
+image_labels = []
+
+for x in range(len(full_image_paths)):
+    label_split = image_paths[x].split('_')
+    image_labels.append(label_split[0])
+
+label_encoder = LabelEncoder()
+label_encoder.fit(image_labels)
+encoded_y = label_encoder.transform(image_labels)
+model = keras.model.load_model('optimized_model.h5')
 
 app = Flask(__name__)
-model = keras.model.load_model('optimized_model.h5')
 
 @app.route('/hello-world', methods=['GET', 'POST'])
 def say_hello():
@@ -18,9 +30,11 @@ def predict():
     resized_array_rgb = cv2.cvtColor(resized_array,cv2.COLOR_GRAY2RGB)
     image_reshaped = np.array(resized_array_rgb).reshape(-1, 240, 320, 3)
 
+    classIndex = int(model.predict_classes(image_reshaped))
     predictions = model.predict(image_reshaped)
     probability = np.amax(predictions)
-    return jsonify({'predictions':predictions, 'probability':probability})
+    car_model_prediction = label_encoder.inverse_transform([classIndex])
+    return jsonify({'predictions':car_model_prediction, 'probability':probability})
 
 if __name__ == "__main__":
     app.run(host=host, port=5000)

@@ -42,7 +42,7 @@ classifications = len(y_categorical[0])
 
 X_train, X_test, y_train, y_test = train_test_split(image_arrays,y_categorical,random_state=42)
 
-dense_layers = [2]
+dense_layers = [0,1,2]
 layer_sizes = [32,64,128]
 conv_layers = [1,2,3]
 
@@ -76,54 +76,3 @@ for dense_layer in dense_layers:
             model.fit(X_train, y_train, epochs=20, 
                     validation_data=(X_test, y_test), callbacks=[tensorboard], verbose=2)
 
-for conv_layer in convlayers:
-    NAME = f"{conv_layer}-conv-128-nodes-0-dense-{int(time.time())}"
-    tensorboard = TensorBoard(log_dir=f'logs/{NAME}')
-    print(NAME)
-
-    model = Sequential()
-
-    model.add(Conv2D(128, (3, 3), activation='relu', input_shape=(240, 320, 3)))
-    model.add(MaxPooling2D((2, 2)))
-
-    for l in range(conv_layer-1):
-        model.add(Conv2D(128, (3, 3), activation='relu'))
-        model.add(MaxPooling2D((2, 2)))
-    
-    model.add(Flatten())
-
-    model.add(Dense(units=classifications,activation='softmax'))
-
-    model.compile(optimizer='adam',
-        loss='categorical_crossentropy',
-        metrics=['accuracy'])
-    
-    model.fit(X_train, y_train, epochs=20, 
-            validation_data=(X_test, y_test), callbacks=[tensorboard], verbose=2)
-
-for conv_layer in convlayers:
-    NAME = f"{conv_layer}-conv-128-nodes-1-dense-{int(time.time())}"
-    tensorboard = TensorBoard(log_dir=f'logs/{NAME}')
-    print(NAME)
-
-    model = Sequential()
-
-    model.add(Conv2D(128, (3, 3), activation='relu', input_shape=(240, 320, 3)))
-    model.add(MaxPooling2D((2, 2)))
-
-    for l in range(conv_layer-1):
-        model.add(Conv2D(128, (3, 3), activation='relu'))
-        model.add(MaxPooling2D((2, 2)))
-    
-    model.add(Flatten())
-
-    model.add(Dense(128, activation='relu'))
-
-    model.add(Dense(units=classifications,activation='softmax'))
-
-    model.compile(optimizer='adam',
-        loss='categorical_crossentropy',
-        metrics=['accuracy'])
-    
-    model.fit(X_train, y_train, epochs=20, 
-            validation_data=(X_test, y_test), callbacks=[tensorboard], verbose=2)
