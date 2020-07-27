@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
-from sklearn.externals import joblib
+import joblib
 
 label_encoder = joblib.load('label_encoders/label_encoder_honda_volkswagen.save')
 model = keras.models.load_model('models/honda_volkswagen_model_1.h5')

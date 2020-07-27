@@ -58,26 +58,27 @@ sizeOfFilter1 = (5,5)
 sizeOfFilter2 = (3,3)
 opt = Adam(lr=0.03)
 
-NAME = 'Optimized_Model'
+NAME = 'Optimized_Model_2_classes'
 print(NAME)
 tensorboard = TensorBoard(log_dir=f'logs/{NAME}')
 
 model = Sequential()
 
 model.add(Conv2D(noOfFilters1,sizeOfFilter1,activation='relu',input_shape=(240,320,3)))
-model.add(Conv2D(noOfFilters1,sizeOfFilter1,activation='relu'))
 model.add(MaxPooling2D((2,2)))
 
-model.add(Conv2D(noOfFilters2,sizeOfFilter2,activation='relu'))
-model.add(Conv2D(noOfFilters2,sizeOfFilter2,activation='relu'))
+model.add(Conv2D(noOfFilters1,sizeOfFilter2,activation='relu'))
+model.add(Conv2D(noOfFilters1,sizeOfFilter2,activation='relu'))
 model.add(MaxPooling2D((2,2)))
 
-model.add(Conv2D(noOfFilters2,sizeOfFilter2,activation='relu'))
-model.add(Conv2D(noOfFilters2,sizeOfFilter2,activation='relu'))
+model.add(Conv2D(noOfFilters1,sizeOfFilter2,activation='relu'))
+model.add(Conv2D(noOfFilters1,sizeOfFilter2,activation='relu'))
 model.add(MaxPooling2D((2,2)))
-model.add(Dropout(0.5))
+model.add(Dropout(0.25))
 
 model.add(Flatten())
+model.add(Dense(512,activation='relu'))
+model.add(Dropout(0.5))
 
 model.add(Dense(units=classifications,activation='softmax'))
 
@@ -86,8 +87,8 @@ model.compile(optimizer=opt,
               metrics=['accuracy'])
 try:
     model.fit(X_train, y_train,
-                        epochs=20,
-                        batch_size=64,
+                        epochs=10,
+                        batch_size=32,
                         validation_split=0.1,
                         shuffle=1,
                         callbacks=[tensorboard])
@@ -96,4 +97,4 @@ except Exception as e:
 
 print(model.evaluate(X_test, y_test))
 
-model.save('models/mazda_jeep_model_3.h5')
+model.save('models/mazda_jeep_model_4.h5')

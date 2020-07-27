@@ -8,7 +8,7 @@ from keras.utils import to_categorical
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.callbacks import TensorBoard
 from keras.optimizers import Adam
-from sklearn.externals import joblib
+import joblib
 
 image_paths = os.listdir('car_images')
 full_image_paths = []
@@ -65,7 +65,6 @@ tensorboard = TensorBoard(log_dir=f'logs/{NAME}')
 model = Sequential()
 
 model.add(Conv2D(noOfFilters1,sizeOfFilter1,activation='relu',input_shape=(240,320,3)))
-model.add(Conv2D(noOfFilters1,sizeOfFilter1,activation='relu'))
 model.add(MaxPooling2D((2,2)))
 
 model.add(Conv2D(noOfFilters2,sizeOfFilter2,activation='relu'))
