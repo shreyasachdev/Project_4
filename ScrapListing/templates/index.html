@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+      </head>
+    <body>
+
+<!--scrape button-->
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1>Convolutional neural network determining car models</h1>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+                </div>
+   
+<!-- images -->
+<div class="container bg-light">
+    <div class="row justify-content-center">
+        <span class="border border-light">
+        <div class="col-md-12 align-self-center">
+            <h1 class="heading text-center"><strong>Featured Scrapped Image</strong></h1>
+            <img src="{{ mars.image_score }}" class="img-responsive"alt="Car Images" >
+        </div> 
+    </div>
+    </span>
+</div>
+<div class="container bg-light">
+    <div class="row justify-content-center">
+        <span class="border border-light">
+        <div class="col-md-auto">
+            <p class="heading2 text-center"><strong>Actual Car Model: {{ mars.image_model }}</strong></p>
+            <p class="heading3 text-center"><strong>Predicted Car Model: {{ mars.predict_model }}</strong></p>
+        </div> 
+        </span>
+    </div>
+</div>
+</div>
+
+<!--Couldnt understand how to get the other stuff working-->
+</body>
+</html>
