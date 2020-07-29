@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Prediction</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+    <input id = "image-selector" type="file" method="post"/>
+    <button id = "predict-button">Predict</button>
+    <p style = "font-weight:bold">Predictions</p>
+    <p>Mazda OR Jeep<span id="prediction"></span></p>
+    <image id= "selected-image" src=""/>
+
+    <!-- <script>
+    $("#name-button").click(function(event){
+        let message = {
+            name:$("#name-input").val()
+        }
+        $.post("http://127.0.0.1:5000/hello", JSON.stringify(message), 
+        function(response){
+            $("#greeting").text(response.greeting);
+            console.log(response);
+        });
+    })</script> -->
+</body>
+</html>

@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- <script src="static/app.js"></script> -->
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <title>Car Prediction</title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
+    <input id = "image-selector" type="file" method="post"/>
+    <button id = "predict-button">Predict</button>
+    <p style = "font-weight:bold">Predictions</p>
+    <p>Mazda OR Jeep<span id="prediction"></span></p>
+    <image id= "selected-image" src=""/>
 
-<div>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action  = "http://localhost:5000/predict" method="POST" enctype=multipart/form-data>
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-</div>
-
+    <!-- <script>
+    $("#name-button").click(function(event){
+        let message = {
+            name:$("#name-input").val()
+        }
+        $.post("http://127.0.0.1:5000/hello", JSON.stringify(message), 
+        function(response){
+            $("#greeting").text(response.greeting);
+            console.log(response);
+        });
+    })</script> -->
 </body>
 </html>

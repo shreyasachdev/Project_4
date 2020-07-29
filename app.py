@@ -5,18 +5,22 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
 
-image_labels = []
-
-for x in range(len(full_image_paths)):
-    label_split = image_paths[x].split('_')
-    image_labels.append(label_split[0])
-
-label_encoder = LabelEncoder()
-label_encoder.fit(image_labels)
-encoded_y = label_encoder.transform(image_labels)
-model = keras.models.load_model('optimized_model.h5')
-
 app = Flask(__name__)
+
+def preprocess_model ():
+
+    image_labels = []
+    for x in range(len(full_image_paths)):
+        label_split = image_paths[x].split('_')
+        image_labels.append(label_split[0])
+
+    label_encoder = LabelEncoder()
+    label_encoder.fit(image_labels)
+    encoded_y = label_encoder.transform(image_labels)
+    model = keras.models.load_model('optimized_model_2.h5')
+    print("Model Loaded!")
+
+preprocess_model ()
 
 @app.route('/hello-world', methods=['GET', 'POST'])
 def say_hello():
@@ -37,4 +41,4 @@ def predict():
     return jsonify({'predictions':car_model_prediction, 'probability':probability})
 
 if __name__ == "__main__":
-    app.run(host=host, port=5000)
+    app.run(debug=True)
