@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
-import keras
-import cv2
+from tensorflow import keras
+from cv2 import cv2
 import numpy as np
 from sklearn.preprocessing import LabelEncoder
 import os
@@ -14,7 +14,7 @@ for x in range(len(full_image_paths)):
 label_encoder = LabelEncoder()
 label_encoder.fit(image_labels)
 encoded_y = label_encoder.transform(image_labels)
-model = keras.model.load_model('optimized_model.h5')
+model = keras.models.load_model('optimized_model.h5')
 
 app = Flask(__name__)
 
